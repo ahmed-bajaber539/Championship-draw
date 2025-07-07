@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>قرعة كأس مطاحن الريان - صلالة</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-image: url(./pic/background.jpg)   ;
+      background-size: auto;
+      background-position: center;
+      background-attachment: fixed;
+
+      text-align: center;
+      direction: rtl;
+      margin: 0;
+      padding: 0;
+      color: #fff;
+    }
+    h1 {
+      margin: 20px 0;
+      font-size: 34px;
+      color: #fff;
+      text-shadow: 2px 2px 4px #000;
+    }
+    .layout {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 20px;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    .column {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .middle {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .group, .semifinal-box {
+         background: #DAA64B;
+    border: 3px solid;
+    border-radius: 12px;
+    padding: 12px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    width: 260px;
+    transition: transform 0.3s ease-in-out;
+    }
+    .group:hover, .semifinal-box:hover {
+      transform: scale(1.03);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+    }
+    .group h3, .semifinal-box h3 {
+      margin-bottom: 10px;
+      font-size: 20px;
+      color: black;
+    }
+    .matchup {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      margin: 6px 0;
+    }
+    .slot {
+      min-width: 100px;
+      height: 40px;
+      background: wheat;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      cursor: pointer;
+      padding: 0 10px;
+      transition: all 0.3s;
+      font-weight: bold;
+      border: 2px dashed transparent;
+      color: #000;
+    }
+    .slot.dragover {
+      border-color: #42a5f5;
+      background-color: #bbdefb;
+    }
+    .vs {
+      font-weight: bold;
+      color: #c62828;
+      font-size: 16px;
+    }
+    .label {
+      font-size: 14px;
+      color: #222;
+      margin: 10px 0 5px;
+    }
+    .highlight {
+      border: 3px solid gold;
+      background-color: #fffde7;
+      font-weight: bold;
+      position: relative;
+    }
+    .highlight::after {
+      content: "★";
+      position: absolute;
+      left: -10px;
+      top: 2px;
+      color: gold;
+      font-size: 16px;
+    }
+    .trophy {
+      font-size: 38px;
+      color: #ffb300;
+      margin-bottom: 10px;
+      text-shadow: 1px 1px 3px #888;
+    }
+    .teams {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 30px auto;
+      max-width: 1200px;
+      padding: 0 20px;
+    }
+    .team {
+      width: 150px;
+      height: 44px;
+      background: #c5cae9;
+      margin: 6px;
+      border-radius: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: grab;
+      font-weight: bold;
+      transition: transform 0.3s ease, background 0.3s ease;
+      font-size: 14px;
+      color: #000;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+    .team:hover {
+      background-color: #9fa8da;
+      transform: scale(1.05);
+    }
+    .team:active {
+      transform: scale(0.95);
+    }
+    @media (max-width: 768px) {
+      .layout {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>🏆 قرعة كأس مطاحن الريان صلالة - النسخة الثانية 🏆 </h1>
+  <div class="layout">
+    <div class="column">
+      <div class="group">
+        <h3>المجموعة A</h3>
+        <div class="label">الدور الأول</div>
+        <div class="matchup">
+          <div class="slot" data-slot="A1"></div>
+          <div class="vs">VS</div>
+          <div class="slot" data-slot="A2"></div>
+        </div>
+        <div class="label">متأهل مباشرة</div>
+        <div class="slot highlight" data-slot="A_auto"></div>
+        <div class="label">الفائز من المجموعة A</div>
+        <div class="slot" data-slot="A_winner"></div>
+      </div>
+      <div class="group">
+        <h3>المجموعة B</h3>
+        <div class="label">الدور الأول</div>
+        <div class="matchup">
+          <div class="slot" data-slot="B1"></div>
+          <div class="vs">VS</div>
+          <div class="slot" data-slot="B2"></div>
+        </div>
+        <div class="label">متأهل مباشرة</div>
+        <div class="slot highlight" data-slot="B_auto"></div>
+        <div class="label">الفائز من المجموعة B</div>
+        <div class="slot" data-slot="B_winner"></div>
+      </div>
+    </div>
+
+    <div class="middle">
+      <div class="semifinal-box">
+        <h3>نصف النهائي والنهائي</h3>
+        <div class="label">A × B</div>
+        <div class="slot" data-slot="SF1_A_B"></div>
+        <div class="label">C × D</div>
+        <div class="slot" data-slot="SF1_C_D"></div>
+        <div class="trophy">🏆</div>
+        <div class="label">النهائي</div>
+        <div class="slot" data-slot="Final"></div>
+      </div>
+    </div>
+
+    <div class="column">
+      <div class="group">
+        <h3>المجموعة C</h3>
+        <div class="label">الدور الأول</div>
+        <div class="matchup">
+          <div class="slot" data-slot="C1"></div>
+          <div class="vs">VS</div>
+          <div class="slot" data-slot="C2"></div>
+        </div>
+        <div class="label">متأهل مباشرة</div>
+        <div class="slot highlight" data-slot="C_auto"></div>
+        <div class="label">الفائز من المجموعة C</div>
+        <div class="slot" data-slot="C_winner"></div>
+      </div>
+      <div class="group">
+        <h3>المجموعة D</h3>
+        <div class="label">الدور الأول</div>
+        <div class="matchup">
+          <div class="slot" data-slot="D1"></div>
+          <div class="vs">VS</div>
+          <div class="slot" data-slot="D2"></div>
+        </div>
+        <div class="label">متأهل مباشرة</div>
+        <div class="slot highlight" data-slot="D_auto"></div>
+        <div class="label">الفائز من المجموعة D</div>
+        <div class="slot" data-slot="D_winner"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="teams">
+    <div class="team" draggable="true">الصمود الديس</div>
+    <div class="team" draggable="true">الاتفاق الجول</div>
+    <div class="team" draggable="true">شمسان باسويد</div>
+    <div class="team" draggable="true">الحصن الديس</div>
+    <div class="team" draggable="true">الاحقاف الشرج</div>
+    <div class="team" draggable="true">اليرموك الشرج</div>
+    <div class="team" draggable="true">الساحل الشرج</div>
+    <div class="team" draggable="true">الاسطوره روكب</div>
+    <div class="team" draggable="true">قلعة بويش</div>
+    <div class="team" draggable="true">الاتحاد بويش</div>
+    <div class="team" draggable="true">الاتحاد حي السلام</div>
+    <div class="team" draggable="true">الوحدة فوه</div>
+  </div>
+
+  <script>
+    const teams = document.querySelectorAll('.team');
+    const slots = document.querySelectorAll('.slot');
+    const teamContainer = document.querySelector('.teams');
+
+    teams.forEach(team => {
+      team.addEventListener('dragstart', (e) => {
+        e.dataTransfer.setData('text/plain', team.textContent);
+      });
+    });
+
+    slots.forEach(slot => {
+      slot.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        slot.classList.add('dragover');
+      });
+
+      slot.addEventListener('dragleave', () => {
+        slot.classList.remove('dragover');
+      });
+
+      slot.addEventListener('drop', (e) => {
+        e.preventDefault();
+        const data = e.dataTransfer.getData('text/plain');
+        slot.textContent = data;
+        slot.classList.remove('dragover');
+
+        // إعادة الفريق إلى قائمة السحب إن لم يكن موجودًا
+        const exists = Array.from(teamContainer.children).some(t => t.textContent === data);
+        if (!exists) {
+          const newTeam = document.createElement('div');
+          newTeam.className = 'team';
+          newTeam.draggable = true;
+          newTeam.textContent = data;
+          newTeam.addEventListener('dragstart', (e) => {
+            e.dataTransfer.setData('text/plain', newTeam.textContent);
+          });
+          teamContainer.appendChild(newTeam);
+        }
+      });
+    });
+    document.addEventListener('touchmove', (e) => {
+  const y = e.touches[0].clientY;
+  const padding = 100; // المسافة من الأعلى/الأسفل التي يبدأ منها السكورل
+  const scrollSpeed = 10;
+
+  if (y < padding) {
+    window.scrollBy(0, -scrollSpeed);
+  } else if (y > window.innerHeight - padding) {
+    window.scrollBy(0, scrollSpeed);
+  }
+}, { passive: true });
+  </script>
+</body>
+</html>
